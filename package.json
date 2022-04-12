@@ -1,0 +1,45 @@
+{
+  "name": "parcoursup-api",
+  "version": "1.0.0",
+  "description": "Unofficial API of Parcoursup mobile",
+  "main": "dist/index.js",
+  "types": "types/index.d.ts",
+  "author": {
+    "name": "Maël GANGLOFF",
+    "email": "contact@maelgangloff.fr"
+  },
+  "license": "GPL-3.0",
+  "keywords": [
+    "Parcoursup",
+    "API"
+  ],
+  "bugs": {
+    "url": "https://github.com/maelgangloff/parcoursup-api/issues",
+    "email": "contact@maelgangloff.fr"
+  },
+  "homepage": "https://github.com/maelgangloff/parcoursup-api#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maelgangloff/parcoursup-api"
+  },
+  "scripts": {
+    "build": "npx tsc -p tsconfig.json",
+    "lint": "npx eslint src/ --ext .ts",
+    "doc": "npx jsdoc2md -f dist/index.js > README.md"
+  },
+  "dependencies": {
+    "axios": "^0.26.1"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.23",
+    "@typescript-eslint/eslint-plugin": "^5.19.0",
+    "@typescript-eslint/parser": "^5.19.0",
+    "eslint": "^7.12.1",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.0.0",
+    "jsdoc-to-markdown": "^7.1.1",
+    "typescript": "^4.6.3"
+  }
+}

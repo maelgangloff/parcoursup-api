@@ -1,0 +1,315 @@
+openapi: 3.0.0
+info:
+  title: Parcoursup mobile API
+  description: Tentative de définition de l'API de Parcoursup mobile
+  version: 1.0.0
+servers:
+  - url: https://mobile.parcoursup.fr/NotificationsService/services
+paths:
+  /token:
+    post:
+      summary: Obtenir un identifiant d'équipement
+      operationId: token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                plateforme:
+                  type: string
+                  example: android
+                plateformeVersion:
+                  type: string
+                  example: '10.0'
+                appVersion:
+                  type: string
+                  example: 2.1.7
+                uuid:
+                  type: string
+                  example: kqsjzuzdqsjdgazwajp
+                modele:
+                  type: string
+                  example: SM-J320FN
+                session:
+                  type: integer
+                  example: 2022
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeRetour:
+                    type: integer
+                  messageRetour:
+                    type: string
+                  messageTitre:
+                    type: string
+                  tokenId:
+                    type: integer
+                  token:
+                    nullable: true
+                  session:
+                    type: integer
+                    example: 2022
+  /login:
+    post:
+      summary: Obtenir un jeton d'authentification
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tokenId:
+                  type: string
+                login:
+                  type: string
+                code:
+                  type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeRetour:
+                    type: integer
+                  messageRetour:
+                    type: string
+                  messageTitre:
+                    type: string
+                  candidat:
+                    type: object
+                    nullable: true
+                    properties:
+                      login:
+                        type: string
+                      identite:
+                        type: string
+                      peutCreerMessage:
+                        type: boolean
+                      g_cn_pn:
+                        type: integer
+                      g_cn_app:
+                        type: integer
+                      g_cn_pc:
+                        type: integer
+                  rubriques:
+                    type: object
+                    nullable: true
+  /menu/count:
+    get:
+      operationId: compteurs
+      summary: Compteurs généraux
+      security:
+        - Authorization: [ ]
+        - AuthToken: [ ]
+        - AuthLogin: [ ]
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeRetour:
+                    type: integer
+                  messageRetour:
+                    type: string
+                  messageTitre:
+                    type: string
+                  counts:
+                    $ref: '#/components/schemas/counts'
+  /voeux:
+    get:
+      operationId: voeux
+      summary: Détail des voeux formulés
+      security:
+        - Authorization: [ ]
+        - AuthToken: [ ]
+        - AuthLogin: [ ]
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeRetour:
+                    type: integer
+                  messageRetour:
+                    type: string
+                  messageTitre:
+                    type: string
+                  voeux:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/voeu'
+                  messagesVoeuxAdmissions:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        liste:
+                          type: string
+                        message:
+                          type: string
+                          nullable: true
+                  messageEnTeteVoeux:
+                    nullable: true
+  /voeux/{voeuId}:
+    get:
+      operationId: voeu
+      summary: Détail d'un voeu formulé
+      security:
+        - Authorization: [ ]
+        - AuthToken: [ ]
+        - AuthLogin: [ ]
+      parameters:
+        - in: path
+          schema:
+            type: string
+          description: Identifiant du voeu formulé
+          name: voeuId
+          required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeRetour:
+                    type: integer
+                  messageRetour:
+                    type: string
+                  messageTitre:
+                    type: string
+                  voeu:
+                    $ref: '#/components/schemas/voeu'
+components:
+  securitySchemes:
+    Authorization:
+      description: Token JWT
+      type: apiKey
+      in: header
+      name: Authorization
+    AuthToken:
+      description: Hash SHA512
+      type: apiKey
+      in: header
+      name: X-Auth-Token
+    AuthLogin:
+      description: Identifiant de l'utilisateur
+      type: apiKey
+      in: header
+      name: X-Auth-Login
+  schemas:
+    voeu:
+      type: object
+      properties:
+        voeuId:
+          type: string
+        etablissement:
+          type: object
+          properties:
+            etablissementId:
+              type: string
+            nom:
+              type: string
+            ville:
+              type: string
+            departementPays:
+              type: string
+        formation:
+          type: string
+        formationEnApprentissage:
+          type: boolean
+        situation:
+          type: object
+          properties:
+            code:
+              type: integer
+            libelle:
+              type: string
+            picto:
+              type: string
+            objet:
+              nullable: true
+        dateLimiteReponse:
+          type: string
+        alerteDateLimiteReponse:
+          type: boolean
+        infosComplementaires:
+          type: string
+        reponsesPossibles:
+          type: array
+          items:
+            type: object
+            properties:
+              codeReponse:
+                type: integer
+              libelleReponse:
+                type: string
+              couleur:
+                type: string
+              couleurTexte:
+                type: string
+              messageConfirmation:
+                type: string
+              motifDemissionRequis:
+                type: boolean
+              motifsDemission:
+                type: array
+                items: { }
+        peutMaintenir:
+          type: boolean
+        a_sv_cod:
+          type: integer
+        a_sv_flg_aff:
+          type: integer
+        a_sv_flg_oui:
+          type: integer
+        a_sv_flg_att:
+          type: integer
+        a_sv_flg_abd:
+          type: integer
+        a_sv_flg_ref:
+          type: integer
+        a_sv_flg_clo:
+          type: integer
+        a_ve_ord:
+          type: integer
+        autresInformations:
+          type: array
+          items: { }
+        maintenirParDefaut:
+          type: boolean
+        lienDocument:
+          type: string
+        titreLien:
+          type: string
+    counts:
+      type: object
+      properties:
+        propositions:
+          type: integer
+        enAttente:
+          type: integer
+        total:
+          type: integer
+        messagesNonLus:
+          type: integer
+        demissionGeneraleAutorisee:
+          type: boolean
