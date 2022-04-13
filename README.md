@@ -46,7 +46,7 @@ const candidat = new Parcoursup(numeroDossier, motDePasseDossier, appareil)
 <a name="Parcoursup+getVoeux"></a>
 
 ### parcoursup.getVoeux()
-Détail des vœux formulés sur la plateforme avec leur statut
+Détail des vœux formulés sur la plateforme avec le détail de leur statut
 
 **Kind**: instance method of [<code>Parcoursup</code>](#Parcoursup)  
 <a name="Parcoursup+getVoeu"></a>
@@ -80,7 +80,7 @@ candidat.getCompteursMenu().then(({counts}) => {
 <a name="Parcoursup+getMessages"></a>
 
 ### parcoursup.getMessages(full)
-Messages reçus
+Boîte de réception du candidat
 
 **Kind**: instance method of [<code>Parcoursup</code>](#Parcoursup)  
 
@@ -91,6 +91,8 @@ Messages reçus
 <a name="Parcoursup.login"></a>
 
 ### Parcoursup.login(username, password, appareil)
+Obtenir des jetons d'authentification
+
 **Kind**: static method of [<code>Parcoursup</code>](#Parcoursup)  
 
 | Param | Type | Description |

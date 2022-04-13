@@ -1,7 +1,7 @@
 import { Appareil, Authentication, TokenResponse } from './entities/Auth/Login';
 import { VoeuxResponse } from './entities/Voeux/VoeuxResponse';
 import { MenuCountResponse } from './entities/Menu/MenuCountResponse';
-import { VoeuResponse } from "./entities/Voeux/VoeuResponse";
+import { VoeuResponse } from './entities/Voeux/VoeuResponse';
 /**
  * Support non-officiel de l'API mobile Parcoursup\
  * La présente librairie ne permet pas d'accepter une proposition d'admission ou de démissionner d'un vœu.\
@@ -34,7 +34,7 @@ export declare class Parcoursup {
      */
     constructor(username: string, password: string, appareil: Appareil);
     /**
-     * Détail des vœux formulés sur la plateforme avec leur statut
+     * Détail des vœux formulés sur la plateforme avec le détail de leur statut
      */
     getVoeux(): Promise<VoeuxResponse>;
     /**
@@ -57,7 +57,7 @@ export declare class Parcoursup {
      */
     getCompteursMenu(): Promise<MenuCountResponse>;
     /**
-     * Messages reçus
+     * Boîte de réception du candidat
      * @param {boolean} full
      */
     getMessages(full?: boolean): Promise<any>;
@@ -75,9 +75,11 @@ export declare class Parcoursup {
      */
     private static addAuthHeaders;
     /**
+     * Obtenir des jetons d'authentification
      * @param {string} username Numéro de dossier
      * @param {string} password Mot de passe
      * @param {Appareil} appareil Informations sur l'appareil mobile utilisé
+     * @static
      */
     static login(username: string, password: string, appareil: Appareil): Promise<Authentication>;
     static getTokenId(appareil: Appareil): Promise<TokenResponse>;

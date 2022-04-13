@@ -198,6 +198,103 @@ paths:
                     type: string
                   voeu:
                     $ref: '#/components/schemas/voeu'
+  /objets:
+    get:
+      summary: Liste des objets pour les messages
+      operationId: objets
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeRetour:
+                    type: integer
+                  messageRetour:
+                    type: string
+                  messageTitre:
+                    type: string
+                  objets:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/objet'
+  /messagesCommun:
+    get:
+      summary: Messages communs
+      operationId: messagesCommun
+      security:
+        - Authorization: [ ]
+        - AuthToken: [ ]
+        - AuthLogin: [ ]
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeRetour:
+                    type: integer
+                  messageRetour:
+                    type: string
+                  messageTitre:
+                    type: string
+                  messagesCommun:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                        libelle:
+                          type: string
+  /messages:
+    get:
+      security:
+        - Authorization: [ ]
+        - AuthToken: [ ]
+        - AuthLogin: [ ]
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeRetour:
+                    type: integer
+                  messageRetour:
+                    type: string
+                  messageTitre:
+                    type: string
+                  messages:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      titre:
+                        type: string
+                      texte:
+                        type: string
+                      estLu:
+                        type: boolean
+                      date:
+                        type: string
+                      auteur:
+                        type: string
+                      messageCandidat:
+                        type: boolean
+                      dateExpiration:
+                        type: integer
+                      dateFormatee:
+                        type: string
+
 components:
   securitySchemes:
     Authorization:
@@ -312,4 +409,13 @@ components:
         messagesNonLus:
           type: integer
         demissionGeneraleAutorisee:
+          type: boolean
+    objet:
+      type: object
+      properties:
+        code:
+          type: integer
+        libelle:
+          type: string
+        saisieLibre:
           type: boolean
