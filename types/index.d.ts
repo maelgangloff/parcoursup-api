@@ -2,6 +2,7 @@ import { Appareil, Authentication, TokenResponse } from './entities/Auth/Login';
 import { VoeuxResponse } from './entities/Voeux/VoeuxResponse';
 import { MenuCountResponse } from './entities/Menu/MenuCountResponse';
 import { VoeuResponse } from './entities/Voeux/VoeuResponse';
+import { MessagesResponse } from './entities/Messages/MessagesResponse';
 /**
  * Support non-officiel de l'API mobile Parcoursup\
  * La présente librairie ne permet pas d'accepter une proposition d'admission ou de démissionner d'un vœu.\
@@ -60,7 +61,7 @@ export declare class Parcoursup {
      * Boîte de réception du candidat
      * @param {boolean} full
      */
-    getMessages(full?: boolean): Promise<any>;
+    getMessages(full?: boolean): Promise<MessagesResponse>;
     /**
      *
      * @param {AxiosRequestConfig} axiosRequestConfig Requête à effectuer

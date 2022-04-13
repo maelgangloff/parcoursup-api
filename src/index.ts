@@ -3,6 +3,7 @@ import { Appareil, Authentication, TokenResponse, LoginResponseHeaders } from '.
 import { VoeuxResponse } from './entities/Voeux/VoeuxResponse'
 import { MenuCountResponse } from './entities/Menu/MenuCountResponse'
 import { VoeuResponse } from './entities/Voeux/VoeuResponse'
+import { MessagesResponse } from './entities/Messages/MessagesResponse'
 
 const BASE_URL = 'https://mobile.parcoursup.fr/NotificationsService/services'
 
@@ -85,7 +86,7 @@ export class Parcoursup {
      * Boîte de réception du candidat
      * @param {boolean} full
      */
-    public async getMessages (full = true): Promise<any> {
+    public async getMessages (full = true): Promise<MessagesResponse> {
       return (await this.makeRequest({
         url: BASE_URL + `/menu/count?full=${full ? 'true' : 'false'}`
       })).data
