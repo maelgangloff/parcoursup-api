@@ -7,7 +7,7 @@ export interface Voeu {
         departementPays: string
     }
     formation: string
-    formationEnApparentissage: string
+    formationEnApparentissage: boolean
     situation: {
         code: number
         libelle: string
