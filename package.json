@@ -1,6 +1,6 @@
 {
   "name": "parcoursup-api",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Unofficial API of Parcoursup mobile",
   "main": "dist/index.js",
   "types": "types/index.d.ts",

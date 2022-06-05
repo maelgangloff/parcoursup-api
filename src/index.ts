@@ -9,7 +9,7 @@ const BASE_URL = 'https://mobile.parcoursup.fr/NotificationsService/services'
 
 /**
  * Support non-officiel de l'API mobile Parcoursup\
- * La présente librairie ne permet pas d'accepter une proposition d'admission ou de démissionner d'un vœu.\
+ * La librairie ne permet pas d'accepter une proposition d'admission ou de démissionner d'un vœu (par mesure de sécurité).\
  * Il est néanmoins possible d'observer l'évolution des indicateurs pour chaque vœu formulé.
  * @example ```js
  * const { Parcoursup } = require('parcoursup-api')
@@ -83,10 +83,10 @@ export class Parcoursup {
     }
 
     /**
-     * Boîte de réception du candidat
+     * Boîte de messagerie du candidat
      * @param {boolean} full
      */
-    public async getMessages (full = true): Promise<MessagesResponse> {
+    public async getMessages (full: boolean = true): Promise<MessagesResponse> {
       return (await this.makeRequest({
         url: BASE_URL + `/menu/count?full=${full ? 'true' : 'false'}`
       })).data

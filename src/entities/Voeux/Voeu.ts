@@ -35,7 +35,17 @@ export interface Voeu {
     a_sv_flg_ref: number
     a_sv_flg_clo: number
     a_ve_ord: number
-    autresInformations: any[]
+    autresInformations: {
+        identifiant: string
+        code: any
+        titre: string
+        texte: string
+        pictoUn: string
+        pictoDeux: string
+        couleurUne: string
+        couleurDeux: string
+        afficher: boolean
+    }[]
     maintenirParDefaut: boolean
     lienDocument: string
     titreLien: string
